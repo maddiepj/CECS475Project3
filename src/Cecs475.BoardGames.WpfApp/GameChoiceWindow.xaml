@@ -11,9 +11,6 @@
     <Window.Resources>
         <!-- This array contains all the game types known by the application -->
         <x:Array x:Key="GameTypes" Type="{x:Type view:IWpfGameFactory}">
-            <othello:OthelloGameFactory/>
-            <tictactoe:TicTacToeGameFactory/>
-            <chess:ChessGameFactory/>
         </x:Array>
     </Window.Resources>
     <StackPanel>
@@ -24,7 +21,7 @@
         </StackPanel.Resources>
         <Label>Choose a game to play:</Label>
         <!-- Bind this ItemsControl to the array of known game types -->
-        <ItemsControl x:Name="GamesList" ItemsSource="{StaticResource GameTypes}">
+        <ItemsControl x:Name="GamesList" ItemsSource="{DynamicResource GameTypes}">
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Click="Button_Click" Content="{Binding GameName, Mode=OneTime}"/>
