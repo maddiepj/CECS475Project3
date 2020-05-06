@@ -5,9 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Cecs475.BoardGames.WpfApp"
         xmlns:view="clr-namespace:Cecs475.BoardGames.WpfView;assembly=Cecs475.BoardGames.WpfView"
-        xmlns:othello="clr-namespace:Cecs475.BoardGames.Othello.WpfView;assembly=Cecs475.BoardGames.Othello.WpfView"
-        xmlns:tictactoe="clr-namespace:Cecs475.BoardGames.TicTacToe.WpfView;assembly=Cecs475.BoardGames.TicTacToe.WpfView"
-        xmlns:chess="clr-namespace:CECS475.BoardGames.Chess.WpfView;assembly=CECS475.BoardGames.Chess.WpfView"
         mc:Ignorable="d"
         Title="Let's play a game!" Width="300" FontSize="16"
         SizeToContent="Height" WindowStartupLocation="CenterScreen">
