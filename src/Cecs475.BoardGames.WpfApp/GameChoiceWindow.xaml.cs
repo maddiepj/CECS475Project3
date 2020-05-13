@@ -1,6 +1,8 @@
-﻿using Cecs475.BoardGames.WpfView;
+﻿using Cecs475.BoardGames.Model;
+using Cecs475.BoardGames.WpfView;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -19,8 +21,33 @@ namespace Cecs475.BoardGames.WpfApp {
 	/// Interaction logic for GameChoiceWindow.xaml
 	/// </summary>
 	public partial class GameChoiceWindow : Window {
-		public GameChoiceWindow() {
+		public GameChoiceWindow()
+		{
 			InitializeComponent();
+			Type IGameType = typeof(IWpfGameFactory);
+			string gamesPath = "../Debug/games";
+			List<object> gamesList = new List<object>();
+			foreach (string dllFile in Directory.GetFiles(gamesPath, "*.dll"))
+			{
+				try
+				{
+					Assembly loadedAssembly = Assembly.LoadFrom(dllFile);
+				}
+				catch (FileLoadException loadEx)
+				{ } // The Assembly has already been loaded.
+				catch (BadImageFormatException imgEx)
+				{ } // If a BadImageFormatException exception is thrown, the file is not an assembly.
+			}
+			var games = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes()).Where(t => IGameType.IsAssignableFrom(t) && t.IsClass);
+			int i = 0;
+			foreach(var game in games)
+			{
+				gamesList.Add(Activator.CreateInstance(game));
+				
+			}
+			this.DataContext = this;
+			this.Resources.Add("GameTypes", gamesList);
+			
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e) {
