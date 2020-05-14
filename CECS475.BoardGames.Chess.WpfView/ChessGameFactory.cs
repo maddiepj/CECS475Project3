@@ -27,9 +27,11 @@ namespace CECS475.BoardGames.Chess.WpfView
 			return new ChessCurrentPlayerConverter();
 		}
 
-		public IWpfGameView CreateGameView()
+		public IWpfGameView CreateGameView(NumberOfPlayers players)
 		{
-			return new UserControl1();
+			var view = new UserControl1();
+			view.ChessViewModel.Players = players;
+			return view;
 		}
 
 	}
