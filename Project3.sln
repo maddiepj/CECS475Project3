@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cecs475.BoardGames.TicTacTo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CECS475.BoardGames.Chess.WpfView", "CECS475.BoardGames.Chess.WpfView\CECS475.BoardGames.Chess.WpfView.csproj", "{668FAFC1-FBAC-4EF1-9B86-2DCA7CFE0277}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cecs475.BoardGames.ComputerOpponent", "Cecs475.BoardGames.ComputerOpponent\Cecs475.BoardGames.ComputerOpponent.csproj", "{C1FEC37A-437B-4887-93DA-42968132FD94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cecs475.BoardGames.ComputerOpponent", "Cecs475.BoardGames.ComputerOpponent\Cecs475.BoardGames.ComputerOpponent.csproj", "{C1FEC37A-437B-4887-93DA-42968132FD94}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
