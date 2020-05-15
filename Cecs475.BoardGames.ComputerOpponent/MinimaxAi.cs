@@ -37,13 +37,13 @@ namespace Cecs475.BoardGames.ComputerOpponent {
 			{
 				MinimaxBestMove move = new MinimaxBestMove();
 				move.Move = null;
-				if(b.CurrentPlayer == 2)
+				if(b.CurrentPlayer == 1)
 				{
-					move.Weight = -1;
+					move.Weight = -9223372036854775808;
 				}
-				else if(b.CurrentPlayer == 1)
+				else if(b.CurrentPlayer == 2)
 				{
-					move.Weight = 1;
+					move.Weight = 9223372036854775807;
 				}
 				
 				//long w = 0;
@@ -53,18 +53,20 @@ namespace Cecs475.BoardGames.ComputerOpponent {
 					long w = FindBestMove(b, 0, 0, depthLeft - 1).Weight;
 					b.UndoLastMove();
 
-					if ((b.CurrentPlayer == 2) && w > move.Weight)
+					if ((b.CurrentPlayer == 1) && w > move.Weight)
 					{
 						move.Weight = w;
 						move.Move = m;
 					}
 
-					else if ((b.CurrentPlayer == 1) && w < move.Weight)
+					else if ((b.CurrentPlayer == 2) && w < move.Weight)
 					{
 						move.Weight = w;
 						move.Move = m;
 					}
+					
 				}
+				
 
 				return move;
 			}
