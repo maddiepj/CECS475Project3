@@ -21,17 +21,53 @@ namespace Cecs475.BoardGames.WpfApp {
 	/// Interaction logic for GameChoiceWindow.xaml
 	/// </summary>
 	public partial class GameChoiceWindow : Window {
+		//Old constructor that uses assembly.loadfrom
+		//public GameChoiceWindow()
+		//{
+		//	InitializeComponent();
+		//	Type IGameType = typeof(IWpfGameFactory);
+		//	string gamesPath = "../Debug/games";
+		//	List<object> gamesList = new List<object>();
+		//	foreach (string dllFile in Directory.GetFiles(gamesPath, "*.dll"))
+		//	{
+		//		try
+		//		{
+		//			Assembly loadedAssembly = Assembly.LoadFrom(dllFile);
+		//		}
+		//		catch (FileLoadException loadEx)
+		//		{ } // The Assembly has already been loaded.
+		//		catch (BadImageFormatException imgEx)
+		//		{ } // If a BadImageFormatException exception is thrown, the file is not an assembly.
+		//	}
+		//	var games = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes()).Where(t => IGameType.IsAssignableFrom(t) && t.IsClass);
+		//	int i = 0;
+		//	foreach(var game in games)
+		//	{
+		//		gamesList.Add(Activator.CreateInstance(game));
+
+		//	}
+		//	this.DataContext = this;
+		//	this.Resources.Add("GameTypes", gamesList);
+
+		//}
+
 		public GameChoiceWindow()
 		{
 			InitializeComponent();
 			Type IGameType = typeof(IWpfGameFactory);
-			string gamesPath = "../Debug/games";
+			string gamesPath = "../Debug/games/";
 			List<object> gamesList = new List<object>();
 			foreach (string dllFile in Directory.GetFiles(gamesPath, "*.dll"))
 			{
 				try
 				{
-					Assembly loadedAssembly = Assembly.LoadFrom(dllFile);
+					//removes the .dll extension
+					string cutdllFile = dllFile.Substring(0, dllFile.Length - 4);
+					String[] cutName = cutdllFile.Split('/');
+					cutdllFile = cutName[cutName.Length - 1];
+					Console.WriteLine("Heres the file name: " + cutdllFile);
+
+					Assembly loadedAssembly = Assembly.Load(cutdllFile +", Version=1.0.0.0, Culture=neutral, PublicKeyToken=68e71c13048d452a");
 				}
 				catch (FileLoadException loadEx)
 				{ } // The Assembly has already been loaded.
@@ -40,14 +76,14 @@ namespace Cecs475.BoardGames.WpfApp {
 			}
 			var games = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes()).Where(t => IGameType.IsAssignableFrom(t) && t.IsClass);
 			int i = 0;
-			foreach(var game in games)
+			foreach (var game in games)
 			{
 				gamesList.Add(Activator.CreateInstance(game));
-				
+
 			}
 			this.DataContext = this;
 			this.Resources.Add("GameTypes", gamesList);
-			
+
 		}
 
 		private void Button_Click(object sender, RoutedEventArgs e) {
