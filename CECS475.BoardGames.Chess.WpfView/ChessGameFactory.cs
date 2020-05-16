@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+
 namespace CECS475.BoardGames.Chess.WpfView
 {
     public class ChessGameFactory : IWpfGameFactory

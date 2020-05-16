@@ -7,6 +7,7 @@ using System;
 using Cecs475.BoardGames.Chess.Model;
 using Cecs475.BoardGames.Model;
 using Cecs475.BoardGames.ComputerOpponent;
+using System.Threading.Tasks;
 
 namespace CECS475.BoardGames.Chess.WpfView
 {
@@ -137,7 +138,7 @@ namespace CECS475.BoardGames.Chess.WpfView
 
 		public String mPromote;
 		private ChessBoard mBoard;
-		private const int MAX_AI_DEPTH = 7;
+		private const int MAX_AI_DEPTH = 4;
 		private IGameAi mGameAi = new MinimaxAi(MAX_AI_DEPTH);
 		private ObservableCollection<ChessSquare> mSquares;
 		public ChessViewModel()
@@ -176,7 +177,7 @@ namespace CECS475.BoardGames.Chess.WpfView
 		/// <summary>
 		/// Applies a move for the current player at the given position.
 		/// </summary>
-		public void ApplyMove(BoardPosition position)
+		public async Task ApplyMove(BoardPosition position)
 		{
 			var possMoves = mBoard.GetPossibleMoves() as IEnumerable<ChessMove>;
 			// Validate the move as possible.
@@ -215,7 +216,7 @@ namespace CECS475.BoardGames.Chess.WpfView
 
 			if (Players == NumberOfPlayers.One && !mBoard.IsFinished)
 			{
-				var bestMove = mGameAi.FindBestMove(mBoard);
+				var bestMove = await Task.Run(() => mGameAi.FindBestMove(mBoard));
 				if (bestMove != null)
 				{
 					mBoard.ApplyMove(bestMove as ChessMove);

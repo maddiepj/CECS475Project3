@@ -20,7 +20,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 		// the starting entries of the array, or set them in the constructor.
 
 		// Change this to use SetPieceAtPosition in ChessBoard constructor instead 
-		public byte[] board = 
+		public byte[] board =
 					   {0b10101011, 0b11001101, 0b11101100, 0b10111010,
 						0b10011001, 0b10011001, 0b10011001, 0b10011001,
 						0b00000000, 0b00000000, 0b00000000, 0b00000000,
@@ -37,6 +37,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 		private int currentPlayer = 1;
 		public bool isFinished;
 		private int mDrawCounter = 0;
+		private long mBoardWeight;
 
 		private Stack<ChessPiece> capturedPieces = new Stack<ChessPiece>();
 		private Stack<int> previousDrawCount = new Stack<int>(new int[] { 0 });
@@ -61,6 +62,17 @@ namespace Cecs475.BoardGames.Chess.Model {
 
 		// You can add set bodies if you think that is appropriate, as long as you justify
 		// the access level (public, private).
+		public long BoardWeight
+		{
+			
+			get
+			{
+				//Calculate Ownership of Each Piece
+				long weight = CurrentAdvantage.Player == 1 ? CurrentAdvantage.Advantage : -CurrentAdvantage.Advantage;
+
+				return weight;
+			}
+		}
 
 		public bool IsFinished
 		{
@@ -1884,7 +1896,6 @@ namespace Cecs475.BoardGames.Chess.Model {
 		}
 		IReadOnlyList<IGameMove> IGameBoard.MoveHistory => mMoveHistory;
 
-		public long BoardWeight => throw new NotImplementedException();
 		#endregion
 
 		#region Hypothetical Functions

@@ -65,8 +65,12 @@ namespace CECS475.BoardGames.Chess.WpfView
 
         public IGameViewModel ViewModel => ChessViewModel;
 
-        private void Border_MouseUp(object sender, MouseButtonEventArgs e)
+        private async void Border_MouseUp(object sender, MouseButtonEventArgs e)
         {
+            if (!IsEnabled)
+            {
+                return;
+            }
             Border b = sender as Border;
             var square = b.DataContext as ChessSquare;
             var vm = FindResource("vm") as ChessViewModel;
@@ -102,7 +106,9 @@ namespace CECS475.BoardGames.Chess.WpfView
                     if (vm.GetPossMovesFromPos(vm.SelectedSquare.Position).Contains(square.Position))
                     {
                         square.IsGreenHighlighted = false;
-                        vm.ApplyMove(square.Position);
+                        IsEnabled = false;
+                        await vm.ApplyMove(square.Position);
+                        IsEnabled = true;
                         square.IsHighlighted = false;
                         vm.GetSquareAtPos(vm.SelectedSquare.Position).IsSelected = false;
                         vm.SelectedSquare = null;
