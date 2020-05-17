@@ -82,7 +82,7 @@ namespace Cecs475.BoardGames.ComputerOpponent {
 
 					if (!(alpha < beta))
 					{
-						break;
+						return move;
 					}
 
 				}
