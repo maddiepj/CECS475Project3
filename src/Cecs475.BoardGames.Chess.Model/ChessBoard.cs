@@ -1880,6 +1880,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 		}
 		public ISet<BoardPosition> GetRookLogic(HashSet<BoardPosition> positions, BoardPosition p){
 			BoardPosition temp = p;
+			//up
 			while (ChessBoard.PositionInBounds(temp.Translate(1, 0)) == true)
 			{
 				temp = temp.Translate(1, 0);
@@ -1890,10 +1891,11 @@ namespace Cecs475.BoardGames.Chess.Model {
 				}
 			}
 			temp = p;
-			//right
-			while (ChessBoard.PositionInBounds(temp.Translate(0, 1)) == true)
+
+			//down
+			while (ChessBoard.PositionInBounds(temp.Translate(-1, 0)) == true)
 			{
-				temp = temp.Translate(0, 1);
+				temp = temp.Translate(-1, 0);
 				positions.Add(temp);
 				if (!PositionIsEmpty(temp))
 				{
@@ -1901,10 +1903,11 @@ namespace Cecs475.BoardGames.Chess.Model {
 				}
 			}
 			temp = p;
-			//down
-			while (ChessBoard.PositionInBounds(temp.Translate(-1, 0)) == true)
+
+			//right
+			while (ChessBoard.PositionInBounds(temp.Translate(0, 1)) == true)
 			{
-				temp = temp.Translate(-1, 0);
+				temp = temp.Translate(0, 1);
 				positions.Add(temp);
 				if (!PositionIsEmpty(temp))
 				{
