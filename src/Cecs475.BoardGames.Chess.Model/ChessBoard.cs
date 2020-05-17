@@ -68,9 +68,303 @@ namespace Cecs475.BoardGames.Chess.Model {
 			get
 			{
 				//Calculate Ownership of Each Piece
-				long weight = CurrentAdvantage.Player == 1 ? CurrentAdvantage.Advantage : -CurrentAdvantage.Advantage;
+				long weight1 = player1total;
+				long weight2 = player2total;
 
-				return weight;
+					foreach (var pos in BoardPosition.GetRectangularPositions(8,8))
+					{
+						ChessPiece currentPiece = GetPieceAtPosition(pos);
+						int playerOfPiece = currentPiece.Player;
+						// if piece is a pawn belonging to the current player
+
+						if (playerOfPiece == 1)
+						{
+							
+
+							if (currentPiece.PieceType == ChessPieceType.Pawn && currentPiece.Player == 1)
+							{
+								switch (pos.Row)
+								{
+									case 0:
+										weight1 += 6;
+										break;
+									case 1:
+										weight1 += 5;
+										break;
+									case 2:
+										weight1 += 4;
+										break;
+									case 3:
+										weight1 += 3;
+										break;
+									case 4:
+										weight1 += 2;
+										break;
+									case 5:
+										weight1 += 1;
+										break;
+									default:
+										weight1 += 0;
+										break;
+
+								} // end of switch
+
+								HashSet<BoardPosition> pawnSet = new HashSet<BoardPosition>();
+								pawnSet.UnionWith(GetPawnLogic(pawnSet, pos));
+								foreach (var p in pawnSet)
+								{
+									ChessPiece currPiece = GetPieceAtPosition(p);
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == CurrentPlayer)
+									{
+										weight1++;
+									}
+								}
+
+
+							} // end of if pawn
+
+							// if piece is a knight or bishop belonging to the current player
+							if (currentPiece.PieceType == ChessPieceType.Bishop && currentPiece.Player == 1)
+							{
+								HashSet<BoardPosition> bishopSet = new HashSet<BoardPosition>();
+								bishopSet.UnionWith(GetBishopLogic(bishopSet, pos));
+								foreach (var p in bishopSet)
+								{
+									ChessPiece currPiece = GetPieceAtPosition(p);
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 1)
+									{
+										weight1++;
+									}
+								}
+
+
+								if (PositionIsAttacked(pos, 2))
+								{
+									weight2 += 1;
+								}
+						} // end of if bishop 
+
+							if (currentPiece.PieceType == ChessPieceType.Knight && currentPiece.Player == 1)
+							{
+								HashSet<BoardPosition> knightSet = new HashSet<BoardPosition>();
+								knightSet.UnionWith(GetKnightLogic(knightSet, pos));
+								foreach (var p in knightSet)
+								{
+									ChessPiece currPiece = GetPieceAtPosition(p);
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 1)
+									{
+										weight1++;
+									}
+								}
+								if (PositionIsAttacked(pos, 2))
+								{
+									weight2 += 1;
+								}
+						} // end of if knight
+
+							if (currentPiece.PieceType == ChessPieceType.Rook && currentPiece.Player == 1)
+							{
+								HashSet<BoardPosition> rookSet = new HashSet<BoardPosition>();
+								rookSet.UnionWith(GetRookLogic(rookSet, pos));
+								foreach (var p in rookSet)
+								{
+									ChessPiece currPiece = GetPieceAtPosition(p);
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 1)
+									{
+										weight1++;
+									}
+								}
+								if (PositionIsAttacked(pos, 2))
+								{
+									weight2 += 2;
+								}
+						} // end of if rook 
+
+							if (currentPiece.PieceType == ChessPieceType.Queen && currentPiece.Player == 1)
+							{
+								HashSet<BoardPosition> queenSet = new HashSet<BoardPosition>();
+								queenSet.UnionWith(GetQueenLogic(queenSet, pos));
+								foreach (var p in queenSet)
+								{
+									ChessPiece currPiece = GetPieceAtPosition(p);
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 1)
+									{
+										weight1++;
+									}
+								}
+								if (PositionIsAttacked(pos, 2))
+								{
+									weight2 += 5;
+								}
+						} // end of if queen
+
+							if (currentPiece.PieceType == ChessPieceType.King && currentPiece.Player == 1)
+							{
+								HashSet<BoardPosition> kingSet = new HashSet<BoardPosition>();
+								kingSet.UnionWith(GetKingLogic(kingSet, pos));
+								foreach (var p in kingSet)
+								{
+									ChessPiece currPiece = GetPieceAtPosition(p);
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 1)
+									{
+										weight1++;
+									}
+								}
+
+								if (PositionIsAttacked(pos, 2))
+								{
+									weight2 += 4;
+								}
+						} // end of if king
+
+
+						} // end of currPiece == 1
+
+					else if (playerOfPiece == 2) // if currPiece == 2
+					{
+						if (currentPiece.PieceType == ChessPieceType.Pawn && currentPiece.Player == 2)
+						{
+							switch (pos.Row)
+							{
+								case 7:
+									weight2 += 6;
+									break;
+								case 6:
+									weight2 += 5;
+									break;
+								case 5:
+									weight2 += 4;
+									break;
+								case 4:
+									weight2 += 3;
+									break;
+								case 3:
+									weight2 += 2;
+									break;
+								case 2:
+									weight2 += 1;
+									break;
+								default:
+									weight2 += 0;
+									break;
+
+							} // end of switch
+						} // end of if pawn
+
+						HashSet<BoardPosition> pawnSet = new HashSet<BoardPosition>();
+						pawnSet.UnionWith(GetPawnLogic(pawnSet, pos));
+						foreach (var p in pawnSet)
+						{
+							ChessPiece currPiece = GetPieceAtPosition(p);
+							if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+							{
+								weight2++;
+							}
+						}
+
+						// if piece is a knight or bishop belonging to the current player
+						if (currentPiece.PieceType == ChessPieceType.Bishop && currentPiece.Player == 2)
+						{
+							HashSet<BoardPosition> bishopSet = new HashSet<BoardPosition>();
+							bishopSet.UnionWith(GetBishopLogic(bishopSet, pos));
+							foreach (var p in bishopSet)
+							{
+								ChessPiece currPiece = GetPieceAtPosition(p);
+								if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+								{
+									weight2++;
+								}
+							}
+
+							if (PositionIsAttacked(pos, 1))
+							{
+								weight1 += 1;
+							}
+						} // end of if bishop 
+
+						if (currentPiece.PieceType == ChessPieceType.Knight && currentPiece.Player == 2)
+						{
+							HashSet<BoardPosition> knightSet = new HashSet<BoardPosition>();
+							knightSet.UnionWith(GetKnightLogic(knightSet, pos));
+							foreach (var p in knightSet)
+							{
+								ChessPiece currPiece = GetPieceAtPosition(p);
+								if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+								{
+									weight2++;
+								}
+							}
+
+							if (PositionIsAttacked(pos, 1))
+							{
+								weight1 += 1;
+							}
+						} // end of if knight
+
+						if (currentPiece.PieceType == ChessPieceType.Rook && currentPiece.Player == 2)
+						{
+							HashSet<BoardPosition> rookSet = new HashSet<BoardPosition>();
+							rookSet.UnionWith(GetRookLogic(rookSet, pos));
+							foreach (var p in rookSet)
+							{
+								ChessPiece currPiece = GetPieceAtPosition(p);
+								if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+								{
+									weight2++;
+								}
+							}
+
+							if (PositionIsAttacked(pos, 1))
+							{
+								weight1 += 2;
+							}
+						}
+
+						if (currentPiece.PieceType == ChessPieceType.Queen && currentPiece.Player == 2)
+						{
+							HashSet<BoardPosition> queenSet = new HashSet<BoardPosition>();
+							queenSet.UnionWith(GetQueenLogic(queenSet, pos));
+							foreach (var p in queenSet)
+							{
+								ChessPiece currPiece = GetPieceAtPosition(p);
+								if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+								{
+									weight2++;
+								}
+							}
+
+							if (PositionIsAttacked(pos, 1))
+							{
+								weight1 += 5;
+							}
+						}
+
+						if (currentPiece.PieceType == ChessPieceType.King && currentPiece.Player == 2)
+						{
+							HashSet<BoardPosition> kingSet = new HashSet<BoardPosition>();
+							kingSet.UnionWith(GetKingLogic(kingSet, pos));
+							foreach (var p in kingSet)
+							{
+								ChessPiece currPiece = GetPieceAtPosition(p);
+								if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+								{
+									weight2++;
+								}
+							}
+
+							if (PositionIsAttacked(pos, 1))
+							{
+								weight1 += 4;
+							}
+						}
+					}
+
+
+
+					} // end of for each
+
+
+				return weight1 - weight2;
 			}
 		}
 
@@ -1289,6 +1583,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 			//}
 			//return false;
 		}
+
 
 		/// <summary>
 		/// Returns a set of all BoardPositions that are attacked by the given player.
