@@ -8,6 +8,7 @@ using Cecs475.BoardGames.Chess.Model;
 using Cecs475.BoardGames.Model;
 using Cecs475.BoardGames.ComputerOpponent;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace CECS475.BoardGames.Chess.WpfView
 {
@@ -213,6 +214,7 @@ namespace CECS475.BoardGames.Chess.WpfView
 
 				}
 			}
+			RebindState();
 
 			if (Players == NumberOfPlayers.One && !mBoard.IsFinished)
 			{
@@ -229,6 +231,8 @@ namespace CECS475.BoardGames.Chess.WpfView
 			{
 				GameFinished?.Invoke(this, new EventArgs());
 			}
+
+			MessageBox.Show("Board Weight: " + mBoard.BoardWeight);
 		}
 
 		public HashSet<BoardPosition> PossibleStartMoves
