@@ -374,24 +374,8 @@ namespace Cecs475.BoardGames.Chess.Model {
 		{
 			get
 			{
-				if (IsStalemate == true)
-				{
-					return true;
-				}
-
-				else if(IsCheckmate == true){
-					return true;
-				}
-
-				else if(IsDraw == true)
-				{
-					return true;
-				}
-
-				else
-				{
-					return false;
-				}
+				var g = GetPossibleMoves();
+				return !g.Any() || IsDraw;
 			}
 		}
 
