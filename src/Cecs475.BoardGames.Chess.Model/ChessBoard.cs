@@ -110,11 +110,11 @@ namespace Cecs475.BoardGames.Chess.Model {
 								} // end of switch
 
 								HashSet<BoardPosition> pawnSet = new HashSet<BoardPosition>();
-								pawnSet.UnionWith(GetPawnLogic(pawnSet, pos));
+								pawnSet.UnionWith(GetPawnLogic(pawnSet, pos, playerOfPiece));
 								foreach (var p in pawnSet)
 								{
 									ChessPiece currPiece = GetPieceAtPosition(p);
-									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == CurrentPlayer)
+									if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 1)
 									{
 										weight1++;
 									}
@@ -142,7 +142,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 								{
 									weight2 += 1;
 								}
-						} // end of if bishop 
+							} // end of if bishop 
 
 							if (currentPiece.PieceType == ChessPieceType.Knight && currentPiece.Player == 1)
 							{
@@ -160,7 +160,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 								{
 									weight2 += 1;
 								}
-						} // end of if knight
+							} // end of if knight
 
 							if (currentPiece.PieceType == ChessPieceType.Rook && currentPiece.Player == 1)
 							{
@@ -178,7 +178,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 								{
 									weight2 += 2;
 								}
-						} // end of if rook 
+							} // end of if rook 
 
 							if (currentPiece.PieceType == ChessPieceType.Queen && currentPiece.Player == 1)
 							{
@@ -196,7 +196,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 								{
 									weight2 += 5;
 								}
-						} // end of if queen
+							} // end of if queen
 
 							if (currentPiece.PieceType == ChessPieceType.King && currentPiece.Player == 1)
 							{
@@ -215,7 +215,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 								{
 									weight2 += 4;
 								}
-						} // end of if king
+							} // end of if king
 
 
 						} // end of currPiece == 1
@@ -249,18 +249,20 @@ namespace Cecs475.BoardGames.Chess.Model {
 									break;
 
 							} // end of switch
+
+							HashSet<BoardPosition> pawnSet = new HashSet<BoardPosition>();
+							pawnSet.UnionWith(GetPawnLogic(pawnSet, pos, playerOfPiece));
+							foreach (var p in pawnSet)
+							{
+								ChessPiece currPiece = GetPieceAtPosition(p);
+								if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
+								{
+									weight2++;
+								}
+							}
 						} // end of if pawn
 
-						HashSet<BoardPosition> pawnSet = new HashSet<BoardPosition>();
-						pawnSet.UnionWith(GetPawnLogic(pawnSet, pos));
-						foreach (var p in pawnSet)
-						{
-							ChessPiece currPiece = GetPieceAtPosition(p);
-							if ((currPiece.PieceType == ChessPieceType.Bishop || currPiece.PieceType == ChessPieceType.Knight) && currPiece.Player == 2)
-							{
-								weight2++;
-							}
-						}
+
 
 						// if piece is a knight or bishop belonging to the current player
 						if (currentPiece.PieceType == ChessPieceType.Bishop && currentPiece.Player == 2)
@@ -1683,7 +1685,20 @@ namespace Cecs475.BoardGames.Chess.Model {
 		#region Piece Logic.
 		public ISet<BoardPosition> GetBishopLogic(HashSet<BoardPosition> positions, BoardPosition p){
 			BoardPosition temp = p;
-		//up and right
+
+			//up and left
+			
+			while (ChessBoard.PositionInBounds(temp.Translate(-1, -1)) == true)
+			{
+				temp = temp.Translate(-1, -1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
+			temp = p;
+			//up and right
 			while (PositionInBounds(temp.Translate(-1, 1)) == true)
 			{
 				temp = temp.Translate(-1, 1);
@@ -1693,17 +1708,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 					break;
 				}
 			}
-			//down and right
-			temp = p;
-			while (ChessBoard.PositionInBounds(temp.Translate(1, 1)) == true)
-			{
-				temp = temp.Translate(1, 1);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
+
 			//down and left
 			temp = p;
 			while (ChessBoard.PositionInBounds(temp.Translate(1, -1)) == true)
@@ -1715,11 +1720,12 @@ namespace Cecs475.BoardGames.Chess.Model {
 					break;
 				}
 			}
-			//up and left
+
+			//down and right
 			temp = p;
-			while (ChessBoard.PositionInBounds(temp.Translate(-1, -1)) == true)
+			while (ChessBoard.PositionInBounds(temp.Translate(1, 1)) == true)
 			{
-				temp = temp.Translate(-1, -1);
+				temp = temp.Translate(1, 1);
 				positions.Add(temp);
 				if (!PositionIsEmpty(temp))
 				{
@@ -1731,65 +1737,10 @@ namespace Cecs475.BoardGames.Chess.Model {
 		}
 		public ISet<BoardPosition> GetQueenLogic(HashSet<BoardPosition> positions, BoardPosition p){
 			BoardPosition temp = p;
-			//up and right
-			while (PositionInBounds(temp.Translate(-1, 1)) == true)
-			{
-				temp = temp.Translate(-1, 1);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
-			//down and right
-			temp = p;
-			while (PositionInBounds(temp.Translate(1, 1)) == true)
-			{
-				temp = temp.Translate(1, 1);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
-			//down and left
-			temp = p;
-			while (PositionInBounds(temp.Translate(1, -1)) == true)
-			{
-				temp = temp.Translate(1, -1);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
-			//up and left
-			temp = p;
-			while (PositionInBounds(temp.Translate(-1, -1)) == true)
-			{
-				temp = temp.Translate(-1, -1);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
-			temp = p;
 			//up
 			while (PositionInBounds(temp.Translate(1, 0)) == true)
 			{
 				temp = temp.Translate(1, 0);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
-			temp = p;
-			//right
-			while (PositionInBounds(temp.Translate(0, 1)) == true)
-			{
-				temp = temp.Translate(0, 1);
 				positions.Add(temp);
 				if (!PositionIsEmpty(temp))
 				{
@@ -1818,48 +1769,70 @@ namespace Cecs475.BoardGames.Chess.Model {
 					break;
 				}
 			}
+			temp = p;
+			//right
+			while (PositionInBounds(temp.Translate(0, 1)) == true)
+			{
+				temp = temp.Translate(0, 1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
+			//up and left
+			temp = p;
+			while (PositionInBounds(temp.Translate(-1, -1)) == true)
+			{
+				temp = temp.Translate(-1, -1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
+			temp = p;
+			//up and right
+			while (PositionInBounds(temp.Translate(-1, 1)) == true)
+			{
+				temp = temp.Translate(-1, 1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
+			//down and left
+			temp = p;
+			while (PositionInBounds(temp.Translate(1, -1)) == true)
+			{
+				temp = temp.Translate(1, -1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
+			//down and right
+			temp = p;
+			while (PositionInBounds(temp.Translate(1, 1)) == true)
+			{
+				temp = temp.Translate(1, 1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
 			return positions;
 		}
 		public ISet<BoardPosition> GetKingLogic(HashSet<BoardPosition> positions, BoardPosition p){
 			BoardPosition temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(-1, 1)) == true)
-			{
-				temp = temp.Translate(-1, 1);
-				positions.Add(temp);
-			}
-			//down and right
-			temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(1, 1)) == true)
-			{
-				temp = temp.Translate(1, 1);
-				positions.Add(temp);
-			}
-			//down and left
-			temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(1, -1)) == true)
-			{
-				temp = temp.Translate(1, -1);
-				positions.Add(temp);
-			}
-			//up and left
-			temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(-1, -1)) == true)
-			{
-				temp = temp.Translate(-1, -1);
-				positions.Add(temp);
-			}
-			temp = p;
+		
 			//up
 			if (ChessBoard.PositionInBounds(temp.Translate(1, 0)) == true)
 			{
 				temp = temp.Translate(1, 0);
-				positions.Add(temp);
-			}
-			temp = p;
-			//right
-			if (ChessBoard.PositionInBounds(temp.Translate(0, 1)) == true)
-			{
-				temp = temp.Translate(0, 1);
 				positions.Add(temp);
 			}
 			temp = p;
@@ -1876,6 +1849,42 @@ namespace Cecs475.BoardGames.Chess.Model {
 				temp = temp.Translate(0, -1);
 				positions.Add(temp);
 			}
+			temp = p;
+			//right
+			if (ChessBoard.PositionInBounds(temp.Translate(0, 1)) == true)
+			{
+				temp = temp.Translate(0, 1);
+				positions.Add(temp);
+			}
+			//up and left
+			temp = p;
+			if (ChessBoard.PositionInBounds(temp.Translate(-1, -1)) == true)
+			{
+				temp = temp.Translate(-1, -1);
+				positions.Add(temp);
+			}
+			temp = p;
+			//up and right
+			if (ChessBoard.PositionInBounds(temp.Translate(-1, 1)) == true)
+			{
+				temp = temp.Translate(-1, 1);
+				positions.Add(temp);
+			}
+			//down and left
+			temp = p;
+			if (ChessBoard.PositionInBounds(temp.Translate(1, -1)) == true)
+			{
+				temp = temp.Translate(1, -1);
+				positions.Add(temp);
+			}
+			//down and right
+			temp = p;
+			if (ChessBoard.PositionInBounds(temp.Translate(1, 1)) == true)
+			{
+				temp = temp.Translate(1, 1);
+				positions.Add(temp);
+			}
+
 			return positions;
 		}
 		public ISet<BoardPosition> GetRookLogic(HashSet<BoardPosition> positions, BoardPosition p){
@@ -1891,23 +1900,10 @@ namespace Cecs475.BoardGames.Chess.Model {
 				}
 			}
 			temp = p;
-
 			//down
 			while (ChessBoard.PositionInBounds(temp.Translate(-1, 0)) == true)
 			{
 				temp = temp.Translate(-1, 0);
-				positions.Add(temp);
-				if (!PositionIsEmpty(temp))
-				{
-					break;
-				}
-			}
-			temp = p;
-
-			//right
-			while (ChessBoard.PositionInBounds(temp.Translate(0, 1)) == true)
-			{
-				temp = temp.Translate(0, 1);
 				positions.Add(temp);
 				if (!PositionIsEmpty(temp))
 				{
@@ -1925,49 +1921,76 @@ namespace Cecs475.BoardGames.Chess.Model {
 					break;
 				}
 			}
+			temp = p;
+			//right
+			while (ChessBoard.PositionInBounds(temp.Translate(0, 1)) == true)
+			{
+				temp = temp.Translate(0, 1);
+				positions.Add(temp);
+				if (!PositionIsEmpty(temp))
+				{
+					break;
+				}
+			}
+
 			return positions;
 		}
-		public ISet<BoardPosition> GetPawnLogic(HashSet<BoardPosition> positions, BoardPosition temp){
+		public ISet<BoardPosition> GetPawnLogic(HashSet<BoardPosition> positions, BoardPosition p, int player){
+			BoardPosition temp = p;
+			if (player == 1)
+			{
+				//up and right
+				if (ChessBoard.PositionInBounds(temp.Translate(-1, 1)))
+				{
+					temp = temp.Translate(-1, 1);
+					positions.Add(temp);
+				}
+				temp = p;
+				//up and left
+				if (ChessBoard.PositionInBounds(temp.Translate(-1, -1)))
+				{
+					temp = temp.Translate(-1, -1);
+					positions.Add(temp);
+				}
+			}
+			if (player == 2)
+			{
+				//down and right
+				if (ChessBoard.PositionInBounds(temp.Translate(1, 1)))
+				{
+					temp = temp.Translate(1, 1);
+					positions.Add(temp);
+				}
+				temp = p;
+				//down and left
+				if (ChessBoard.PositionInBounds(temp.Translate(1, -1)))
+				{
+					temp = temp.Translate(1, -1);
+					positions.Add(temp);
+				}
+			}
+
+
 			return positions;
 		}
 		public ISet<BoardPosition> GetKnightLogic(HashSet<BoardPosition> positions, BoardPosition p){
 			BoardPosition temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(-2, 1)) == true)
-			{
-				temp = temp.Translate(-2, 1);
-				positions.Add(temp);
-				//if (!PositionIsEmpty(temp))
-				//{
-				//	break;
-				//}
-			}
-			//down and right
-			temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(2, 1)) == true)
-			{
-				temp = temp.Translate(2, 1);
-				positions.Add(temp);
-				//if (!PositionIsEmpty(temp))
-				//{
-				//	break;
-				//}
-			}
-			//down and left
-			temp = p;
-			if (ChessBoard.PositionInBounds(temp.Translate(2, -1)) == true)
-			{
-				temp = temp.Translate(2, -1);
-				positions.Add(temp);
-				//if (!PositionIsEmpty(temp))
-				//{
-				//	break;
-				//}
-			}
 			//up and left
-			temp = p;
+			
 			if (ChessBoard.PositionInBounds(temp.Translate(-2, -1)) == true)
 			{
 				temp = temp.Translate(-2, -1);
+				positions.Add(temp);
+				//if (!PositionIsEmpty(temp))
+				//{
+				//	break;
+				//}
+			}
+			//up and right
+			temp = p;
+			if (ChessBoard.PositionInBounds(temp.Translate(-2, 1)) == true)
+			{
+				temp = temp.Translate(-2, 1);
 				positions.Add(temp);
 				//if (!PositionIsEmpty(temp))
 				//{
@@ -1990,6 +2013,28 @@ namespace Cecs475.BoardGames.Chess.Model {
 			if (ChessBoard.PositionInBounds(temp.Translate(1, 2)) == true)
 			{
 				temp = temp.Translate(1, 2);
+				positions.Add(temp);
+				//if (!PositionIsEmpty(temp))
+				//{
+				//	break;
+				//}
+			}
+			//down and left
+			temp = p;
+			if (ChessBoard.PositionInBounds(temp.Translate(2, -1)) == true)
+			{
+				temp = temp.Translate(2, -1);
+				positions.Add(temp);
+				//if (!PositionIsEmpty(temp))
+				//{
+				//	break;
+				//}
+			}
+			//down and right
+			temp = p;
+			if (ChessBoard.PositionInBounds(temp.Translate(2, 1)) == true)
+			{
+				temp = temp.Translate(2, 1);
 				positions.Add(temp);
 				//if (!PositionIsEmpty(temp))
 				//{
