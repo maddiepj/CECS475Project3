@@ -593,6 +593,23 @@ namespace Cecs475.BoardGames.Chess.Model {
 							possibleMoves.Add(new ChessMove(temp, temp.Translate(-1, 0), ChessPieceType.Queen, ChessMoveType.PawnPromote));
 						}
 
+						temp = pos;
+						//up
+						if (ChessBoard.PositionInBounds(temp.Translate(-1, 0)) == true && (GetPieceAtPosition(temp.Translate(-1, 0)).PieceType == ChessPieceType.Empty) && temp.Translate(-1, 0).Row != 0)
+						{
+							temp = temp.Translate(-1, 0);
+							positions.Add(temp);
+							// Moving white pawn two spaces forward
+							if (pos.Row == 6 && (GetPieceAtPosition(temp.Translate(-1, 0)).PieceType == ChessPieceType.Empty))
+							{
+								temp = pos;
+								temp = temp.Translate(-2, 0);
+								positions.Add(temp);
+
+							} // End of two-space forward checks
+
+						}
+						temp = pos;
 						//up and right
 						if (ChessBoard.PositionInBounds(temp.Translate(-1, 1)) == true && (GetPieceAtPosition(temp.Translate(-1, 1)).Player == 2))
 						{
@@ -628,22 +645,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 								positions.Add(temp);
 							}
 						}
-						temp = pos;
-						//up
-						if (ChessBoard.PositionInBounds(temp.Translate(-1, 0)) == true && (GetPieceAtPosition(temp.Translate(-1, 0)).PieceType == ChessPieceType.Empty) && temp.Translate(-1, 0).Row != 0)
-						{
-							temp = temp.Translate(-1, 0);
-							positions.Add(temp);
-							// Moving white pawn two spaces forward
-							if (pos.Row == 6 && (GetPieceAtPosition(temp.Translate(-1, 0)).PieceType == ChessPieceType.Empty))
-							{
-								temp = pos;
-								temp = temp.Translate(-2, 0);
-								positions.Add(temp);
 
-							} // End of two-space forward checks
-
-						}
 
 					}
 					if (currentPlayer == 2)
@@ -659,6 +661,22 @@ namespace Cecs475.BoardGames.Chess.Model {
 							possibleMoves.Add(new ChessMove(temp, temp.Translate(1, 0), ChessPieceType.Queen, ChessMoveType.PawnPromote));
 						}
 
+						temp = pos;
+						//down
+						if (ChessBoard.PositionInBounds(temp.Translate(1, 0)) == true && (GetPieceAtPosition(temp.Translate(1, 0)).PieceType == ChessPieceType.Empty) && temp.Translate(1, 0).Row != 7)
+						{
+							temp = temp.Translate(1, 0);
+							positions.Add(temp);
+							// Moving black pawn two spaces forward (aka down)
+							if (pos.Row == 1 && (GetPieceAtPosition(temp.Translate(1, 0)).PieceType == ChessPieceType.Empty))
+							{
+								temp = pos;
+								temp = temp.Translate(2, 0);
+								positions.Add(temp);
+							}
+						}
+
+						temp = pos;
 						// Else if not a pawn promotion
 						// Down and left
 						if (ChessBoard.PositionInBounds(temp.Translate(1, -1)) == true && (GetPieceAtPosition(temp.Translate(1, -1)).Player == 1))
@@ -695,20 +713,7 @@ namespace Cecs475.BoardGames.Chess.Model {
 							}
 
 						}
-						temp = pos;
-						//down
-						if (ChessBoard.PositionInBounds(temp.Translate(1, 0)) == true && (GetPieceAtPosition(temp.Translate(1, 0)).PieceType == ChessPieceType.Empty) && temp.Translate(1, 0).Row != 7)
-						{
-							temp = temp.Translate(1, 0);
-							positions.Add(temp);
-							// Moving black pawn two spaces forward (aka down)
-							if (pos.Row == 1 && (GetPieceAtPosition(temp.Translate(1, 0)).PieceType == ChessPieceType.Empty))
-							{
-								temp = pos;
-								temp = temp.Translate(2, 0);
-								positions.Add(temp);
-							}
-						}
+
 
 					}
 
