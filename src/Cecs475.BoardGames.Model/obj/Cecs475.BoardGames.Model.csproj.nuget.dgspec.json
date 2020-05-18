@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj": {}
+    "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj": {}
   },
   "projects": {
-    "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj": {
+    "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj",
+        "projectUniqueName": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj",
         "projectName": "Cecs475.BoardGames.Model",
-        "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj",
-        "packagesPath": "C:\\Users\\Matthew\\.nuget\\packages\\",
-        "outputPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\obj\\",
+        "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj",
+        "packagesPath": "C:\\Users\\maddi\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Matthew\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\maddi\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -55,7 +58,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
         }
       }
     }

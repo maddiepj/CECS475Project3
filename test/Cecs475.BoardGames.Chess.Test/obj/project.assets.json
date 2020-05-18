@@ -1842,12 +1842,11 @@
       ]
     },
     "Microsoft.CSharp/4.0.1": {
-      "sha512": "17h8b5mXa87XYKrrVqdgZ38JefSUqLChUQpXgSnpzsM0nDOhE40FTeNWOJ/YmySGV6tG6T8+hjz6vxbknHJr6A==",
+      "sha512": "uSxWTf+SjHbaWu0oiiTY6jT4xY1853TMkiGc0ntKqUWDSmsoUN++B2smjagd9IpQGJYf/5SVTxYA4TEVhivXWg==",
       "type": "package",
       "path": "microsoft.csharp/4.0.1",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -2992,12 +2991,11 @@
       ]
     },
     "System.Dynamic.Runtime/4.0.11": {
-      "sha512": "db34f6LHYM0U0JpE+sOmjar27BnqTVkbLJhgfwMpTdgTigG/Hna3m2MYVwnFzGGKnEJk2UXFuoVTr8WUbU91/A==",
+      "sha512": "ZHpshSDbBoOeeob2QXlJH23IUxaVCOobeKz25/8lbCUcckh2b6DqV8fyT80la84hCbDSfs0DJOriM5N9T1a6rA==",
       "type": "package",
       "path": "system.dynamic.runtime/4.0.11",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5839,19 +5837,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Matthew\\.nuget\\packages\\": {}
+    "C:\\Users\\maddi\\.nuget\\packages\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\test\\Cecs475.BoardGames.Chess.Test\\Cecs475.BoardGames.Chess.Test.csproj",
+      "projectUniqueName": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\test\\Cecs475.BoardGames.Chess.Test\\Cecs475.BoardGames.Chess.Test.csproj",
       "projectName": "Cecs475.BoardGames.Chess.Test",
-      "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\test\\Cecs475.BoardGames.Chess.Test\\Cecs475.BoardGames.Chess.Test.csproj",
-      "packagesPath": "C:\\Users\\Matthew\\.nuget\\packages\\",
-      "outputPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\test\\Cecs475.BoardGames.Chess.Test\\obj\\",
+      "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\test\\Cecs475.BoardGames.Chess.Test\\Cecs475.BoardGames.Chess.Test.csproj",
+      "packagesPath": "C:\\Users\\maddi\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\test\\Cecs475.BoardGames.Chess.Test\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Matthew\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\maddi\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5864,20 +5866,20 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Chess.Model\\Cecs475.BoardGames.Chess.Model.csproj": {
-              "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Chess.Model\\Cecs475.BoardGames.Chess.Model.csproj"
+            "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Chess.Model\\Cecs475.BoardGames.Chess.Model.csproj": {
+              "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Chess.Model\\Cecs475.BoardGames.Chess.Model.csproj"
             },
-            "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Chess.View\\Cecs475.BoardGames.Chess.View.csproj": {
-              "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Chess.View\\Cecs475.BoardGames.Chess.View.csproj"
+            "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Chess.View\\Cecs475.BoardGames.Chess.View.csproj": {
+              "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Chess.View\\Cecs475.BoardGames.Chess.View.csproj"
             },
-            "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj": {
-              "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj"
+            "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj": {
+              "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.Model\\Cecs475.BoardGames.Model.csproj"
             },
-            "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.View\\Cecs475.BoardGames.View.csproj": {
-              "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\src\\Cecs475.BoardGames.View\\Cecs475.BoardGames.View.csproj"
+            "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.View\\Cecs475.BoardGames.View.csproj": {
+              "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\src\\Cecs475.BoardGames.View\\Cecs475.BoardGames.View.csproj"
             },
-            "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\test\\Cecs475.BoardGames.Test\\Cecs475.BoardGames.Test.csproj": {
-              "projectPath": "D:\\Matthew\\Documents\\School\\Spring 2020\\Net Frameworks Local\\Project 3\\test\\Cecs475.BoardGames.Test\\Cecs475.BoardGames.Test.csproj"
+            "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\test\\Cecs475.BoardGames.Test\\Cecs475.BoardGames.Test.csproj": {
+              "projectPath": "C:\\Users\\maddi\\Desktop\\Spring 2020\\CECS 475 Frameworks\\CECS_475_Project_3\\test\\Cecs475.BoardGames.Test\\Cecs475.BoardGames.Test.csproj"
             }
           }
         }
@@ -5925,7 +5927,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
       }
     }
   }
