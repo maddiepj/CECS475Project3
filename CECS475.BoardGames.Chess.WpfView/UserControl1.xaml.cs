@@ -106,11 +106,12 @@ namespace CECS475.BoardGames.Chess.WpfView
                     if (vm.GetPossMovesFromPos(vm.SelectedSquare.Position).Contains(square.Position))
                     {
                         square.IsGreenHighlighted = false;
+                        vm.GetSquareAtPos(vm.SelectedSquare.Position).IsSelected = false;
                         IsEnabled = false;
                         await vm.ApplyMove(square.Position);
                         IsEnabled = true;
                         square.IsHighlighted = false;
-                        vm.GetSquareAtPos(vm.SelectedSquare.Position).IsSelected = false;
+                        //vm.GetSquareAtPos(vm.SelectedSquare.Position).IsSelected = false;
                         vm.SelectedSquare = null;
                         
                     }

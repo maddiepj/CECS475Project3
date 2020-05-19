@@ -231,8 +231,8 @@ namespace CECS475.BoardGames.Chess.WpfView
 			{
 				GameFinished?.Invoke(this, new EventArgs());
 			}
-
-			MessageBox.Show("Board Weight: " + mBoard.BoardWeight);
+			//Show Boardweight in a message box when a move is applied
+			//MessageBox.Show("Board Weight: " + mBoard.BoardWeight);
 		}
 
 		public HashSet<BoardPosition> PossibleStartMoves
